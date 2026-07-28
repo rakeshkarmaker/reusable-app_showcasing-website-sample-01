@@ -75,6 +75,17 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  /* Only hide native cursor when CustomCursor component is mounted and active */
+  body.custom-cursor-active,
+  body.custom-cursor-active * {
+    cursor: none !important;
+  }
+  @media (pointer: coarse) {
+    body.custom-cursor-active,
+    body.custom-cursor-active * {
+      cursor: auto !important;
+    }
+  }
   :focus-visible {
     outline: 2px solid #CCFF00;
     outline-offset: 3px;
@@ -86,6 +97,30 @@
 }
 
 @layer utilities {
+
+  /* Custom sleek scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 102, 255, 0.25);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 102, 255, 0.5);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
   /* ── Typography ── */
   .font-display {
@@ -274,4 +309,99 @@
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
   }
+
+  /* ── Glow utilities ── */
+  .glow-lime {
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.45), 0 0 60px rgba(204, 255, 0, 0.18);
+  }
+  .glow-coral {
+    box-shadow: 0 0 20px rgba(255, 107, 74, 0.45), 0 0 60px rgba(255, 107, 74, 0.18);
+  }
+  .glow-violet {
+    box-shadow: 0 0 20px rgba(124, 95, 200, 0.45), 0 0 60px rgba(124, 95, 200, 0.18);
+  }
+  .text-glow-lime {
+    text-shadow: 0 0 20px rgba(204, 255, 0, 0.6), 0 0 40px rgba(204, 255, 0, 0.3);
+  }
+
+  /* ── Shimmer keyframe (GSAP magnetic button hover) ── */
+  @keyframes shimmer-sweep {
+    from { transform: translateX(-100%) skewX(-12deg); }
+    to   { transform: translateX(250%) skewX(-12deg); }
+  }
+  .shimmer-btn {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: translateX(-100%) skewX(-12deg);
+    transition: none;
+  }
+  .shimmer-btn:hover::after {
+    animation: shimmer-sweep 0.65s ease-out forwards;
+  }
+
+  /* ── GSAP will-change guard ── */
+  .gsap-will-change {
+    will-change: transform;
+  }
+  .gsap-will-change-opacity {
+    will-change: opacity;
+  }
+
+  /* ── Char reveal (for GSAP split text) ── */
+  .char-reveal-char {
+    display: inline-block;
+    overflow: hidden;
+  }
+  .char-reveal-inner {
+    display: inline-block;
+    transform: translateY(110%);
+  }
+
+  /* ── Grain texture overlay ── */
+  .grain-overlay {
+    position: relative;
+  }
+  .grain-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
+    z-index: 1;
+  }
+
+  /* ── Border glow card ── */
+  .card-glow {
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card-glow:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 60px rgba(204, 255, 0, 0.12), 0 8px 24px rgba(10,10,10,0.12);
+  }
+
+  /* ── Magnetic button style ── */
+  .btn-magnetic {
+    transition: box-shadow 0.3s ease;
+  }
+  .btn-magnetic:hover {
+    box-shadow: 0 8px 30px rgba(204, 255, 0, 0.35);
+  }
+
+  /* ── Vertical text clip reveal ── */
+  @keyframes text-clip-up {
+    from { clip-path: inset(0 0 100% 0); transform: translateY(12px); opacity: 0; }
+    to   { clip-path: inset(0 0 0% 0);   transform: translateY(0);    opacity: 1; }
+  }
+  .text-reveal {
+    animation: text-clip-up 0.65s cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+  }
 }
+

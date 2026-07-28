@@ -126,9 +126,10 @@ export function FeaturesSection() {
                       {["#CCFF00","#FF6B4A","#7C5FC8","#0A0A0A"].map((color, i) => (
                         <motion.button
                           key={i}
-                          whileHover={{ scale: 1.15 }}
+                          data-cursor="COLOR"
+                          whileHover={{ scale: 1.25 }}
                           whileTap={{ scale: 0.9 }}
-                          className="w-8 h-8 rounded-full border-2 border-white/40"
+                          className="w-8 h-8 rounded-full border-2 border-white/40 shadow-sm"
                           style={{ backgroundColor: color }}
                         />
                       ))}
@@ -140,7 +141,8 @@ export function FeaturesSection() {
                     {[...Array(6)].map((_, i) => (
                       <div
                         key={i}
-                        className="rounded-lg aspect-square"
+                        data-cursor="GALLERY"
+                        className="rounded-lg aspect-square transition-transform duration-200 hover:scale-105"
                         style={{
                           background: [
                             "#FF6B4A","#7C5FC8","#0A0A0A",
@@ -160,6 +162,7 @@ export function FeaturesSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.6, type: "spring", stiffness: 300, damping: 22 }}
+                data-cursor="ANALYTICS"
                 className="absolute -bottom-4 right-4 bg-white rounded-2xl shadow-xl px-4 py-3 z-20"
               >
                 <div className="text-[10px] text-gray-text mb-0.5">Profile views</div>
@@ -193,6 +196,7 @@ export function FeaturesSection() {
                   return (
                     <motion.div
                       key={f.label}
+                      data-cursor="PRO"
                       initial={{ opacity: 0, x: -16 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
@@ -212,10 +216,11 @@ export function FeaturesSection() {
             <ScrollReveal y={16} delay={0.2}>
               <motion.a
                 href="#download"
+                data-cursor="GO PRO"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                className="pill-dark px-6 py-3 text-sm shadow-lg inline-flex items-center gap-2"
+                className="pill-dark px-6 py-3 text-sm shadow-lg inline-flex items-center gap-2 btn-magnetic shimmer-btn"
               >
                 Go Pro
                 <ArrowRight className="w-4 h-4" />

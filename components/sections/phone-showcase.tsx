@@ -43,20 +43,22 @@ export function PhoneShowcase() {
               <div className="flex flex-wrap gap-3">
                 <motion.a
                   href="#download"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.96 }}
+                  data-cursor="DOWNLOAD"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                  className="pill-lime px-6 py-3 text-sm shadow-sm"
+                  className="pill-lime px-6 py-3 text-sm shadow-sm btn-magnetic shimmer-btn"
                 >
                   Get the App
                   <ArrowRight className="w-4 h-4" />
                 </motion.a>
                 <motion.a
                   href="#features"
-                  whileHover={{ scale: 1.04, backgroundColor: "rgba(10,10,10,0.06)" }}
-                  whileTap={{ scale: 0.96 }}
+                  data-cursor="MORE"
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(10,10,10,0.06)" }}
+                  whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-gray-border text-sm font-semibold text-ink"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-gray-border text-sm font-semibold text-ink btn-magnetic"
                 >
                   Learn more
                 </motion.a>
@@ -68,19 +70,20 @@ export function PhoneShowcase() {
           <ScrollReveal y={30} delay={0.1}>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { value: "50K+", label: "Active users", bg: "#CCFF00", textColor: "#0A0A0A" },
-                { value: "98%", label: "Satisfaction rate", bg: "#0A0A0A", textColor: "#CCFF00" },
-                { value: "4.9★", label: "App store rating", bg: "#FF6B4A", textColor: "#FFFFFF" },
-                { value: "120+", label: "Countries reached", bg: "#7C5FC8", textColor: "#FFFFFF" },
+                { value: "50K+", label: "Active users", bg: "#CCFF00", textColor: "#0A0A0A", cursor: "USERS" },
+                { value: "98%", label: "Satisfaction rate", bg: "#0A0A0A", textColor: "#CCFF00", cursor: "RATINGS" },
+                { value: "4.9★", label: "App store rating", bg: "#FF6B4A", textColor: "#FFFFFF", cursor: "STORE" },
+                { value: "120+", label: "Countries reached", bg: "#7C5FC8", textColor: "#FFFFFF", cursor: "GLOBAL" },
               ].map((stat, i) => (
                 <motion.div
                   key={i}
+                  data-cursor={stat.cursor}
                   initial={{ opacity: 0, scale: 0.88 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ delay: i * 0.08, duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] as const }}
-                  whileHover={{ y: -4 }}
-                  className="rounded-2xl p-6 flex flex-col justify-between min-h-[130px]"
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  className="rounded-2xl p-6 flex flex-col justify-between min-h-[130px] card-glow"
                   style={{ backgroundColor: stat.bg }}
                 >
                   <span

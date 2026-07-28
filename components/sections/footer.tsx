@@ -79,6 +79,7 @@ export function Footer() {
             <span key={link.label} className="flex items-center gap-5">
               <a
                 href={link.href}
+                data-cursor="GO"
                 className="text-sm font-medium text-ink/50 hover:text-ink transition-colors duration-200"
               >
                 {link.label}
@@ -96,8 +97,9 @@ export function Footer() {
             <motion.a
               key={name}
               href={href}
+              data-cursor={name.split(" ")[0].toUpperCase()}
               aria-label={name}
-              whileHover={{ scale: 1.15, color: "#0A0A0A" }}
+              whileHover={{ scale: 1.25, color: "#0A0A0A" }}
               transition={{ type: "spring", stiffness: 400, damping: 18 }}
               className="flex items-center text-ink/30 hover:text-ink transition-colors duration-200"
             >

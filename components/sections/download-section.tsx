@@ -53,10 +53,11 @@ export function DownloadSection() {
             {/* App Store */}
             <motion.a
               href="#"
+              data-cursor="IOS"
               whileHover={{ scale: 1.06, y: -2 }}
               whileTap={{ scale: 0.96 }}
               transition={{ type: "spring", stiffness: 400, damping: 18 }}
-              className="flex items-center gap-3 bg-white rounded-xl px-5 py-3.5 shadow-xl hover:shadow-2xl transition-shadow"
+              className="flex items-center gap-3 bg-white rounded-xl px-5 py-3.5 shadow-xl hover:shadow-2xl transition-shadow btn-magnetic shimmer-btn"
               aria-label="Download on the App Store"
             >
               <Apple className="w-6 h-6 text-ink flex-shrink-0" />
@@ -69,10 +70,11 @@ export function DownloadSection() {
             {/* Google Play */}
             <motion.a
               href="#"
+              data-cursor="ANDROID"
               whileHover={{ scale: 1.06, y: -2 }}
               whileTap={{ scale: 0.96 }}
               transition={{ type: "spring", stiffness: 400, damping: 18 }}
-              className="flex items-center gap-3 rounded-xl px-5 py-3.5 shadow-xl border border-white/10 hover:border-white/20 transition-colors"
+              className="flex items-center gap-3 rounded-xl px-5 py-3.5 shadow-xl border border-white/10 hover:border-white/20 transition-colors btn-magnetic"
               style={{ background: "rgba(255,255,255,0.07)" }}
               aria-label="Get it on Google Play"
             >
@@ -89,12 +91,13 @@ export function DownloadSection() {
         <ScrollReveal y={20} delay={0.15}>
           <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
             {[
-              { value: "Free", label: "Forever" },
-              { value: "4.9★", label: "App rating" },
-              { value: "50K+", label: "Users" },
+              { value: "Free", label: "Forever", cursor: "FREE" },
+              { value: "4.9★", label: "App rating", cursor: "RATING" },
+              { value: "50K+", label: "Users", cursor: "USERS" },
             ].map((item, i) => (
               <motion.div
                 key={i}
+                data-cursor={item.cursor}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

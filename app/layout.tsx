@@ -34,8 +34,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakartaSans.variable} ${dmSans.variable}`}>
-      <body className="antialiased">
+    <html lang="en" className={`${jakartaSans.variable} ${dmSans.variable}`} suppressHydrationWarning>
+      <body className="antialiased" suppressHydrationWarning>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-5 focus:py-2.5 focus:rounded-full focus:bg-lime focus:text-ink focus:font-semibold focus:shadow-xl focus:outline-none"

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Heart, Smile, Zap, MessageCircle, Share2, Camera } from "lucide-react";
+import { Heart, Smile, Zap, MessageCircle, Share2, Camera, Plane, Palette, Music, Utensils } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
 const emotions = [
@@ -72,6 +72,7 @@ export function MissionSection() {
 
               {/* Phone */}
               <div
+                data-cursor="EMOTIONS"
                 className="relative phone-shadow rounded-[2.5rem] overflow-hidden z-10"
                 style={{
                   width: 240,
@@ -100,27 +101,31 @@ export function MissionSection() {
                   {/* Content grid */}
                   <div className="flex-1 p-3 grid grid-cols-2 gap-2 overflow-hidden">
                     {[
-                      { bg: "#FF6B4A", label: "Travel", icon: "✈️" },
-                      { bg: "#7C5FC8", label: "Art", icon: "🎨" },
-                      { bg: "#CCFF00", label: "Music", textColor: "#0A0A0A", icon: "🎵" },
-                      { bg: "#0A0A0A", label: "Food", icon: "🍜" },
-                    ].map((item, i) => (
-                      <motion.div
-                        key={i}
-                        whileHover={{ scale: 1.04 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                        className="rounded-xl flex flex-col items-center justify-center h-24 cursor-pointer"
-                        style={{ backgroundColor: item.bg }}
-                      >
-                        <span className="text-2xl mb-1">{item.icon}</span>
-                        <span
-                          className="text-[9px] font-bold"
-                          style={{ color: item.textColor ?? "white" }}
+                      { bg: "#FF6B4A", label: "Travel", icon: Plane },
+                      { bg: "#7C5FC8", label: "Art", icon: Palette },
+                      { bg: "#CCFF00", label: "Music", textColor: "#0A0A0A", icon: Music },
+                      { bg: "#0A0A0A", label: "Food", icon: Utensils },
+                    ].map((item, i) => {
+                      const CategoryIcon = item.icon;
+                      return (
+                        <motion.div
+                          key={i}
+                          data-cursor={item.label.toUpperCase()}
+                          whileHover={{ scale: 1.06 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                          className="rounded-xl flex flex-col items-center justify-center h-24 cursor-pointer"
+                          style={{ backgroundColor: item.bg }}
                         >
-                          {item.label}
-                        </span>
-                      </motion.div>
-                    ))}
+                          <CategoryIcon className="w-5 h-5 mb-1" style={{ color: item.textColor ?? "white" }} />
+                          <span
+                            className="text-[9px] font-bold"
+                            style={{ color: item.textColor ?? "white" }}
+                          >
+                            {item.label}
+                          </span>
+                        </motion.div>
+                      );
+                    })}
                   </div>
 
                   {/* Emotion reactions bar */}
@@ -129,7 +134,8 @@ export function MissionSection() {
                       {["❤️","😂","😮","😢","🔥","👏"].map((e, i) => (
                         <motion.button
                           key={i}
-                          whileHover={{ scale: 1.25 }}
+                          data-cursor="REACT"
+                          whileHover={{ scale: 1.3 }}
                           whileTap={{ scale: 0.9 }}
                           transition={{ type: "spring", stiffness: 500, damping: 15 }}
                           className="text-base"
@@ -147,6 +153,7 @@ export function MissionSection() {
                 initial={{ opacity: 0, x: 30, y: -20 }}
                 animate={{ opacity: 1, x: 0, y: -20 }}
                 transition={{ delay: 0.6, type: "spring", stiffness: 300, damping: 22 }}
+                data-cursor="REACTIONS"
                 className="absolute -right-4 top-1/3 bg-white rounded-2xl shadow-xl px-3 py-2 flex items-center gap-2 z-20 border border-gray-border/30"
               >
                 <span className="text-base">❤️</span>
@@ -187,13 +194,14 @@ export function MissionSection() {
                   <motion.div
                     key={emotion.label}
                     variants={cardVariants}
-                    whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.08)" }}
+                    data-cursor={emotion.label.toUpperCase()}
+                    whileHover={{ y: -6, boxShadow: "0 14px 36px rgba(0,0,0,0.09)" }}
                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                    className="rounded-2xl p-4 cursor-default"
+                    className="rounded-2xl p-4 cursor-default card-glow"
                     style={{ backgroundColor: emotion.bg }}
                   >
                     <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
+                      className="w-9 h-9 rounded-xl flex items-center justify-center mb-3 shadow-sm"
                       style={{ backgroundColor: emotion.color }}
                     >
                       <Icon
@@ -211,10 +219,11 @@ export function MissionSection() {
             <ScrollReveal y={16} delay={0.2}>
               <motion.a
                 href="#platform"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
+                data-cursor="EXPLORE"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                className="inline-flex items-center gap-2 pill-dark px-6 py-3 text-sm"
+                className="inline-flex items-center gap-2 pill-dark px-6 py-3 text-sm btn-magnetic shimmer-btn"
               >
                 Explore features
               </motion.a>

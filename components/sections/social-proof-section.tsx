@@ -108,13 +108,14 @@ export function SocialProofSection() {
             <motion.div
               key={t.id}
               custom={i}
+              data-cursor="REVIEW"
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               whileHover={shouldReduceMotion ? {} : { y: -6, boxShadow: "0 16px 40px rgba(0,0,0,0.09)" }}
               transition={{ type: "spring", stiffness: 400, damping: 22 }}
-              className="bg-gray-mid rounded-2xl p-6 flex flex-col gap-4 cursor-default"
+              className="bg-gray-mid rounded-2xl p-6 flex flex-col gap-4 cursor-default card-glow"
             >
               {/* Stars */}
               <div className="flex items-center gap-0.5">
@@ -159,13 +160,14 @@ export function SocialProofSection() {
             <motion.div
               key={t.id}
               custom={i + 3}
+              data-cursor="REVIEW"
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               whileHover={shouldReduceMotion ? {} : { y: -6, boxShadow: "0 16px 40px rgba(0,0,0,0.09)" }}
               transition={{ type: "spring", stiffness: 400, damping: 22 }}
-              className="bg-gray-mid rounded-2xl p-6 flex flex-col gap-4 cursor-default"
+              className="bg-gray-mid rounded-2xl p-6 flex flex-col gap-4 cursor-default card-glow"
             >
               <div className="flex items-center gap-0.5">
                 {Array.from({ length: t.rating }).map((_, j) => (

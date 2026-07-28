@@ -46,7 +46,7 @@ export function Header() {
           className="w-full max-w-6xl rounded-full px-5 sm:px-7 h-14 sm:h-[60px] flex items-center justify-between border border-gray-border/60"
         >
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 group" aria-label="Poity home">
+          <a href="/" className="flex items-center gap-2 group" aria-label="Poity home" data-cursor="POITY">
             {/* Dot-grid logomark */}
             <div className="grid grid-cols-3 gap-[3px] p-1">
               {Array.from({ length: 9 }).map((_, i) => (
@@ -68,6 +68,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
+                data-cursor="GO"
                 className="relative px-4 py-2 text-sm font-medium text-ink/60 hover:text-ink transition-colors duration-200 rounded-full hover:bg-gray-mid group"
               >
                 {link.label}
@@ -79,16 +80,18 @@ export function Header() {
           <div className="hidden md:flex items-center gap-2">
             <button
               aria-label="Search"
+              data-cursor="SEARCH"
               className="flex items-center justify-center size-9 rounded-full hover:bg-gray-mid transition-colors text-ink/60 hover:text-ink"
             >
               <Search className="w-4 h-4" />
             </button>
             <motion.a
               href="#download"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
+              data-cursor="JOIN"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 18 }}
-              className="pill-lime px-5 py-2 text-sm shadow-sm"
+              className="pill-lime px-5 py-2 text-sm shadow-sm btn-magnetic shimmer-btn"
             >
               Get Started
             </motion.a>

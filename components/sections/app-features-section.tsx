@@ -140,12 +140,13 @@ export function AppFeaturesSection() {
               <motion.div
                 key={feature.id}
                 custom={i}
+                data-cursor={feature.title.toUpperCase()}
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
                 whileHover={{ y: shouldReduceMotion ? 0 : -6, transition: { type: "spring", stiffness: 400, damping: 22 } }}
-                className="rounded-2xl p-5 flex flex-col gap-4"
+                className="rounded-2xl p-5 flex flex-col gap-4 card-glow"
                 style={{ backgroundColor: feature.bgCard }}
               >
                 {/* Visual preview */}
@@ -154,7 +155,7 @@ export function AppFeaturesSection() {
                 {/* Icon + label */}
                 <div className="flex items-center gap-3">
                   <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                    className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm"
                     style={{ backgroundColor: feature.accentColor }}
                   >
                     <Icon className="w-4.5 h-4.5" style={{ color: feature.accentText }} />
@@ -168,6 +169,7 @@ export function AppFeaturesSection() {
 
                 <motion.a
                   href="#download"
+                  data-cursor="LEARN"
                   whileHover={{ x: 4 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20 }}
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink group"
@@ -185,10 +187,11 @@ export function AppFeaturesSection() {
           <div className="text-center mt-12">
             <motion.a
               href="#download"
+              data-cursor="ALL FEATURES"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 18 }}
-              className="pill-lime px-7 py-3.5 text-sm shadow-lg"
+              className="pill-lime px-7 py-3.5 text-sm shadow-lg btn-magnetic shimmer-btn"
             >
               Explore all features
               <ArrowRight className="w-4 h-4" />

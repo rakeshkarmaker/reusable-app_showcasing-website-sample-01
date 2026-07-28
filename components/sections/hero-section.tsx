@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, Heart, MessageSquare, Share2, Home, Search, Plus, Bell, User } from "lucide-react";
 
 const floatingAvatars = [
   { id: 1, initials: "KL", color: "#FF6B4A", x: "-14%", y: "18%", delay: 0, size: 52 },
@@ -133,20 +133,22 @@ export function HeroSection() {
             >
               <motion.a
                 href="#download"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                data-cursor="START"
+                whileHover={{ scale: 1.06 }}
+                whileTap={{ scale: 0.94 }}
                 transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                className="pill-dark px-6 py-3 text-sm shadow-lg"
+                className="pill-dark px-6 py-3 text-sm shadow-lg btn-magnetic shimmer-btn"
               >
                 Get Started
                 <ArrowRight className="w-4 h-4" />
               </motion.a>
               <motion.a
                 href="#platform"
-                whileHover={{ scale: 1.04, backgroundColor: "rgba(10,10,10,0.08)" }}
-                whileTap={{ scale: 0.96 }}
+                data-cursor="PLAY"
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(10,10,10,0.08)" }}
+                whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full border-2 border-ink/20 text-sm font-semibold text-ink"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full border-2 border-ink/20 text-sm font-semibold text-ink btn-magnetic"
               >
                 <Play className="w-3.5 h-3.5 fill-current" />
                 See how it works
@@ -157,6 +159,7 @@ export function HeroSection() {
             <motion.div
               variants={itemVariants}
               className="flex items-center gap-3 pt-1"
+              data-cursor="50K+"
             >
               <div className="flex -space-x-2">
                 {["#FF6B4A","#7C5FC8","#0A0A0A","#FF6B4A"].map((color, i) => (
@@ -188,6 +191,7 @@ export function HeroSection() {
               {floatingAvatars.map((avatar) => (
                 <motion.div
                   key={avatar.id}
+                  data-cursor={avatar.initials}
                   initial={{ opacity: 0, scale: 0.6 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{
@@ -224,7 +228,8 @@ export function HeroSection() {
 
               {/* Phone frame */}
               <div
-                className="relative phone-shadow rounded-[3rem] overflow-hidden"
+                data-cursor="APP"
+                className="relative phone-shadow rounded-[3rem] overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
                 style={{
                   width: 260,
                   height: 520,
@@ -275,10 +280,10 @@ export function HeroSection() {
                         </div>
                       </div>
                       <div className="w-full h-20 rounded-xl bg-gradient-to-br from-lime to-lime-deep mb-2" />
-                      <div className="flex gap-3">
-                        {["❤️","💬","🔗"].map((e, i) => (
-                          <span key={i} className="text-xs">{e}</span>
-                        ))}
+                      <div className="flex items-center gap-3 text-slate-500">
+                        <Heart className="w-3.5 h-3.5 fill-red-500 text-red-500" />
+                        <MessageSquare className="w-3.5 h-3.5 text-slate-600" />
+                        <Share2 className="w-3.5 h-3.5 text-slate-600" />
                       </div>
                     </div>
 
@@ -296,14 +301,14 @@ export function HeroSection() {
                     </div>
                   </div>
 
-                  {/* Bottom nav */}
-                  <div className="flex items-center justify-around py-3 px-2 bg-black/20 backdrop-blur-sm">
-                    {["🏠","🔍","➕","🔔","👤"].map((icon, i) => (
+                  {/* Bottom nav with Lucide icons */}
+                  <div className="flex items-center justify-around py-3 px-2 bg-black/20 backdrop-blur-sm text-white">
+                    {[Home, Search, Plus, Bell, User].map((IconComp, i) => (
                       <button
                         key={i}
-                        className={`w-8 h-8 rounded-full flex items-center justify-center text-sm ${i === 0 ? "bg-white/25" : ""}`}
+                        className={`w-8 h-8 rounded-full flex items-center justify-center ${i === 0 ? "bg-white/25 text-white" : "text-white/80 hover:text-white"}`}
                       >
-                        {icon}
+                        <IconComp className="w-4 h-4" />
                       </button>
                     ))}
                   </div>

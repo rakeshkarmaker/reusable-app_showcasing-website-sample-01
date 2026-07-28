@@ -1,70 +1,118 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export function CustomCursor() {
-  const circleRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  const [hoverText, setHoverText] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
+  const mouseX = useMotionValue(-100);
+  const mouseY = useMotionValue(-100);
+
+  // Smooth springs for outer ring follower
+  const springConfig = { damping: 28, stiffness: 350, mass: 0.4 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
   useEffect(() => {
-    // Only enable on fine pointer devices (non-touch)
+    // Only run on client
+    setMounted(true);
+
+    // Disable custom cursor on touch/mobile devices
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     setIsVisible(true);
-
-    let mouseX = -100;
-    let mouseY = -100;
-    let circleX = -100;
-    let circleY = -100;
-    let animationFrameId: number;
+    document.body.classList.add("custom-cursor-active");
 
     const onMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+      if (!isVisible) setIsVisible(true);
     };
 
-    const handleMouseLeave = () => {
-      if (circleRef.current) circleRef.current.style.opacity = "0";
-    };
+    const onMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
 
-    const handleMouseEnter = () => {
-      if (circleRef.current) circleRef.current.style.opacity = "1";
-    };
+      const interactive = target.closest<HTMLElement>(
+        "button, a, [role='button'], [data-cursor], input, textarea, select"
+      );
 
-    const render = () => {
-      // Linear Interpolation (Lerp) with factor 0.15
-      circleX += (mouseX - circleX) * 0.15;
-      circleY += (mouseY - circleY) * 0.15;
-
-      if (circleRef.current) {
-        // Translate3d for GPU acceleration; offset by -15px to center the 30px circle on cursor tip
-        circleRef.current.style.transform = `translate3d(${circleX - 15}px, ${circleY - 15}px, 0)`;
+      if (interactive) {
+        setIsHovered(true);
+        const cursorAttr = interactive.getAttribute("data-cursor");
+        if (cursorAttr) {
+          setHoverText(cursorAttr);
+        } else {
+          setHoverText("");
+        }
+      } else {
+        setIsHovered(false);
+        setHoverText("");
       }
+    };
 
-      animationFrameId = requestAnimationFrame(render);
+    const onMouseLeave = () => {
+      setIsVisible(false);
+    };
+
+    const onMouseEnter = () => {
+      setIsVisible(true);
     };
 
     window.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseenter", handleMouseEnter);
-
-    animationFrameId = requestAnimationFrame(render);
+    window.addEventListener("mouseover", onMouseOver);
+    document.addEventListener("mouseleave", onMouseLeave);
+    document.addEventListener("mouseenter", onMouseEnter);
 
     return () => {
+      document.body.classList.remove("custom-cursor-active");
       window.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-      document.removeEventListener("mouseenter", handleMouseEnter);
-      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("mouseover", onMouseOver);
+      document.removeEventListener("mouseleave", onMouseLeave);
+      document.removeEventListener("mouseenter", onMouseEnter);
     };
-  }, []);
+  }, [mouseX, mouseY]);
 
-  if (!isVisible) return null;
+  if (!mounted || !isVisible) return null;
 
   return (
-    <div
-      ref={circleRef}
-      className="pointer-events-none fixed top-0 left-0 z-[9999] w-[30px] h-[30px] rounded-full border border-white/60 bg-transparent transition-opacity duration-300 shadow-[0_0_8px_rgba(255,255,255,0.2)]"
-      style={{ willChange: "transform" }}
-    />
+    <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden" aria-hidden="true">
+      {/* Outer Spring Follower Ring & High-Contrast Label */}
+      <motion.div
+        style={{
+          x: smoothX,
+          y: smoothY,
+        }}
+        animate={{
+          scale: hoverText ? 2.4 : isHovered ? 1.7 : 1,
+          borderColor: isHovered ? "rgba(10, 10, 10, 0.9)" : "rgba(10, 10, 10, 0.5)",
+          backgroundColor: isHovered ? "rgba(255, 255, 255, 0.3)" : "rgba(255, 255, 255, 0.15)",
+        }}
+        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+        className="fixed -top-4 -left-4 w-8 h-8 rounded-full border-2 border-black/70 backdrop-blur-[2px] flex items-center justify-center shadow-[0_2px_12px_rgba(0,0,0,0.2)]"
+      >
+        {hoverText && (
+          <span className="text-[7px] font-black text-lime bg-black tracking-widest uppercase px-1.5 py-0.5 rounded-full shadow-md whitespace-nowrap border border-white/20">
+            {hoverText}
+          </span>
+        )}
+      </motion.div>
+
+      {/* Inner High-Contrast Dual-Tone Center Dot (Black Core + White Border) */}
+      <motion.div
+        style={{
+          x: mouseX,
+          y: mouseY,
+        }}
+        animate={{
+          scale: isHovered ? 0.6 : 1,
+        }}
+        className="fixed -top-2 -left-2 w-4 h-4 rounded-full bg-black border-2 border-white shadow-[0_0_8px_rgba(0,0,0,0.6)]"
+      />
+    </div>
   );
 }

@@ -291,11 +291,11 @@ export function HomeServiceSection() {
                 </div>
 
                 {/* 3. Promo Banner */}
-                <div className="relative rounded-2xl bg-gradient-to-r from-blue-600 to-sky-500 p-3.5 text-white overflow-hidden shadow-lg shadow-blue-600/25 flex items-center justify-between">
+                <div data-cursor="PROMO" className="relative rounded-2xl bg-gradient-to-r from-blue-600 to-sky-500 p-3.5 text-white overflow-hidden shadow-lg shadow-blue-600/25 flex items-center justify-between">
                   <div className="space-y-1 z-10 max-w-[55%]">
                     <span className="text-lg font-black tracking-tight leading-tight block">25% OFF</span>
                     <p className="text-[10px] text-blue-100 font-medium leading-tight">Grab this exclusive offer</p>
-                    <button className="mt-1.5 px-3 py-1 bg-white text-blue-600 rounded-lg text-[10px] font-bold shadow-sm">
+                    <button data-cursor="CLAIM" className="mt-1.5 px-3 py-1 bg-white text-blue-600 rounded-lg text-[10px] font-bold shadow-sm hover:scale-105 transition-transform">
                       Book Now
                     </button>
                   </div>
@@ -318,6 +318,7 @@ export function HomeServiceSection() {
                   <h4 className="text-xs font-bold text-slate-800 mb-2">Service Categories</h4>
                   <div className="grid grid-cols-4 gap-2 text-center">
                     <button
+                      data-cursor="CARPENTER"
                       onClick={() => setSelectedCategory(selectedCategory === "carpenter" ? "all" : "carpenter")}
                       className="flex flex-col items-center gap-1 group focus:outline-none"
                     >
@@ -332,6 +333,7 @@ export function HomeServiceSection() {
                     </button>
 
                     <button
+                      data-cursor="ELECTRICIAN"
                       onClick={() => setSelectedCategory(selectedCategory === "electrician" ? "all" : "electrician")}
                       className="flex flex-col items-center gap-1 group focus:outline-none"
                     >
@@ -346,6 +348,7 @@ export function HomeServiceSection() {
                     </button>
 
                     <button
+                      data-cursor="PLUMBING"
                       onClick={() => setSelectedCategory(selectedCategory === "plumbing" ? "all" : "plumbing")}
                       className="flex flex-col items-center gap-1 group focus:outline-none"
                     >
@@ -360,6 +363,7 @@ export function HomeServiceSection() {
                     </button>
 
                     <button
+                      data-cursor="CLEANING"
                       onClick={() => setSelectedCategory(selectedCategory === "cleaning" ? "all" : "cleaning")}
                       className="flex flex-col items-center gap-1 group focus:outline-none"
                     >
