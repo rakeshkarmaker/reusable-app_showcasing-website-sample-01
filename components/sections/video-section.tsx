@@ -117,9 +117,10 @@ export function VideoSection() {
                   {/* Play Button */}
                   <motion.button
                     onClick={handlePlay}
+                    data-cursor="PLAY VIDEO"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    className="relative w-20 h-20 rounded-full bg-sage text-white flex items-center justify-center shadow-xl hover:shadow-2xl transition-shadow"
+                    className="relative w-20 h-20 rounded-full bg-lime text-ink flex items-center justify-center shadow-xl hover:shadow-2xl transition-shadow btn-magnetic shimmer-btn"
                   >
                     <motion.div
                       className="absolute inset-0 rounded-full border-2 border-white/30"

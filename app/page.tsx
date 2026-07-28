@@ -6,6 +6,7 @@ import { Header } from "@/components/sections/header";
 import { HeroSection } from "@/components/sections/hero-section";
 import { MissionSection } from "@/components/sections/mission-section";
 import { PhoneShowcase } from "@/components/sections/phone-showcase";
+import { VideoSection } from "@/components/sections/video-section";
 import { AppFeaturesSection } from "@/components/sections/app-features-section";
 import { HomeServiceSection } from "@/components/sections/home-service-section";
 import { FeaturesSection } from "@/components/sections/features-section";
@@ -22,6 +23,7 @@ export default function Landing() {
       <HeroSection />
       <MissionSection />
       <PhoneShowcase />
+      <VideoSection />
       <AppFeaturesSection />
       <HomeServiceSection />
       <FeaturesSection />
