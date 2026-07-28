@@ -1,5 +1,6 @@
 "use client";
 
+import { CustomCursor } from "@/components/custom-cursor";
 import { ScrollProgressBar } from "@/components/scroll-progress";
 import { Header } from "@/components/sections/header";
 import { HeroSection } from "@/components/sections/hero-section";
@@ -15,6 +16,7 @@ import { Footer } from "@/components/sections/footer";
 export default function Landing() {
   return (
     <div id="main" className="bg-background">
+      <CustomCursor />
       <ScrollProgressBar />
       <Header />
       <HeroSection />
