@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Search, ChevronDown, Menu, X } from "lucide-react";
+import Link from 'next/link'
 
 const navLinks = [
   { href: "#emotions", label: "Features" },
@@ -46,7 +47,7 @@ export function Header() {
           className="w-full max-w-6xl rounded-full px-5 sm:px-7 h-14 sm:h-[60px] flex items-center justify-between border border-gray-border/60"
         >
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 group" aria-label="Poity home" data-cursor="POITY">
+          <Link href="/" className="flex items-center gap-2 group" aria-label="Poity home" data-cursor="POITY">
             {/* Dot-grid logomark */}
             <div className="grid grid-cols-3 gap-[3px] p-1">
               {Array.from({ length: 9 }).map((_, i) => (
@@ -60,19 +61,19 @@ export function Header() {
             <span className="font-display font-800 text-[1.3rem] text-ink tracking-tight">
               Poity
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 data-cursor="GO"
                 className="relative px-4 py-2 text-sm font-medium text-ink/60 hover:text-ink transition-colors duration-200 rounded-full hover:bg-gray-mid group"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -128,22 +129,22 @@ export function Header() {
       >
         <div className="glass-panel rounded-2xl p-3 space-y-1">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
               className="block px-4 py-3 rounded-xl text-sm font-medium text-ink/70 hover:text-ink hover:bg-gray-mid transition-all"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
+          <Link
             href="#download"
             onClick={() => setMobileOpen(false)}
             className="block w-full text-center mt-1 gradient-lime text-ink px-4 py-3 rounded-xl text-sm font-semibold"
           >
             Get Started
-          </a>
+          </Link>
         </div>
       </motion.div>
     </>

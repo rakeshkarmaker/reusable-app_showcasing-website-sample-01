@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Link from 'next/link'
 
 const footerLinks = [
   { label: "About", href: "/" },
@@ -77,13 +78,13 @@ export function Footer() {
         >
           {footerLinks.map((link, i) => (
             <span key={link.label} className="flex items-center gap-5">
-              <a
+              <Link
                 href={link.href}
                 data-cursor="GO"
                 className="text-sm font-medium text-ink/50 hover:text-ink transition-colors duration-200"
               >
                 {link.label}
-              </a>
+              </Link>
               {i < footerLinks.length - 1 && (
                 <span aria-hidden="true" className="text-gray-border">·</span>
               )}
